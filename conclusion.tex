@@ -1,0 +1,67 @@
+\section{Conclusion}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Further Results of CSE}
+\begin{itemize}
+    \item Can study \textbf{power, False Discovery Rate (FDR)}, and \textbf{bias of bounded estimators}.
+    \item Theory also holds for \textbf{Generalized Linear Models (GLMs)} after conditioning on covariates.
+    \begin{itemize}
+        \item E.g. logistic regression.
+    \end{itemize}
+    \item \textbf{Quasi-convexity} results for the Tilt-Bound/Inverted Tilt-Bound simplify computations to checking vertices.
+    \item See pre-print for details.
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Computational Tricks}
+    \begin{itemize}
+
+    \item Adaptive simulation/grid sizing (dramatic overall cost reduction!).
+
+    \item Correlated simulations (dramatic sampling reduction!). 
+    \begin{itemize}
+        \item \textbf{BoTorch} uses a similar (more advanced) trick.
+        \item Thanks to \textbf{Prof. Art Owen} for the idea!
+    \end{itemize}
+    
+    \item How to perform \textbf{1 trillion simulations} of a complex Bayesian design? 
+    \begin{itemize}
+        \item \textbf{Integrated Nested Laplace Approximation (INLA)}.
+        \item Our INLA code is \textbf{1 million times faster} than standard MCMC packages.
+        \item Similar accuracy in most cases.
+    \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Remarks}
+\begin{itemize}
+    \item Proof-by-simulation is \textbf{general, powerful, and robust}.
+    \item Continuous Simulation Extension converts
+        simulations at finite points
+        into guarantees over \textbf{regions}.
+
+    \item Practical advantage: CSE analyzes the design 
+        \textbf{as represented in code}. Robust to:
+        \begin{itemize}
+            \item Approximations.
+            \item Theoretical uncertainties with convergence of algorithms
+        \end{itemize}
+    \item With the right software, method is \textbf{tractable}!
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{End Goals}
+%\begin{itemize}
+%    \item We hope these tools can streamline innovation in trial design
+%    \item Objective proofs should help improve regulatory consistency
+%    \item Reducing the time and human capital cost of validating new procedures is good for everyone
+%    \item Speculatively: this might pave the way to use ``black-box" statistical procedures. Our guarantees would apply, as long as the model class assumption is trusted.
+%\end{itemize}
+\begin{itemize}
+    \item Streamline innovation in trial design.
+    \item Improve regulatory consistency with objective proofs.
+    \item Reduce time and human capital cost of validating new procedures.
+    \item Speculatively: enable new ``black-box" statistical procedures.
+\end{itemize}
+\end{frame}

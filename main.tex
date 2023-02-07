@@ -1,0 +1,61 @@
+\documentclass{beamer}
+\usepackage{amsfonts}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{natbib}
+\usepackage{bbm}
+\usepackage{centernot}
+
+\title{A Rigorous Framework for Automated Design Assessment and Type I Error Control}
+
+% I honestly don't really care about the order,
+% but from an audience perspective, the one who's presenting may want to put their name first?
+% Currently, it is set to the same ordering as in the paper.
+\author[shortname]{James Yang\inst{1,2} \and T. Ben Thompson\inst{2} \and Michael Sklar\inst{2}} 
+\institute[shortinst]{\inst{1} Stanford University \and
+                      \inst{2} Confirm Solutions}
+\date{\today}
+
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\pr}[1]{\left( #1 \right)}
+\newcommand{\br}[1]{\left[#1\right]}
+\newcommand{\sbr}[1]{\left\{#1\right\}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\EEE}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\design}{\mathcal{D}}
+\newcommand{\indic}[1]{\mathbbm{1}_{#1}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\expit}{expit}
+\DeclareMathOperator{\logit}{logit}
+\DeclareMathOperator{\Binom}{Binom}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+\input{introduction_revamp}
+\input{methodology}
+\input{conclusion}
+
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{frame}
+
+\input{extra}
+
+\end{document}

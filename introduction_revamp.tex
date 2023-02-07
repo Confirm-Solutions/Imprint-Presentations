@@ -1,0 +1,257 @@
+\section{Introduction}%
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Pharma R\&D is Growing}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/pharma_growing.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Eroom's Law: Efficiency Down}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/efficiency_down.png}
+\end{figure}    
+\end{frame}
+
+\begin{frame}{Covid Put a Focus on Shortening Clinical Trials}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/covid.png}
+\end{figure}    
+\uncover<2->{
+\textbf{How can statisticians speed up the clinical trials system?}
+}
+\end{frame}
+
+\begin{frame}{Add Features to Improve Trial Efficiency}
+\begin{itemize}
+    \item Smoothly combine studies (e.g. Phase I/II, or II/III).
+    \item Stop early for success (efficacy), or failure (futility).
+    \item Compare multiple treatments or doses to select the best.
+    \item Adaptive sample sizing.
+    \item Use of outside data.
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Problem: Analytic Control goes Out the Window!}
+\textbf{Adaptive T-Test:}
+\begin{itemize}
+    \item $X_i \sim \normal(\mu, \sigma^2)$ (unknown $\mu, \sigma$).
+    \item $H_0: \mu = 0$.
+    \item Total of $6$ analyses.
+    \item Before each analysis, add $10$ i.i.d. samples.
+    \item At each analysis $i$, reject if 
+    \begin{align*}
+        T_i := \frac{\sqrt{N_i} \bar{X}_i}{\hat{\sigma}_i} > 2
+        \quad \text{and} \quad
+        \bar{X}_i > 0.1
+    \end{align*}
+\end{itemize}
+\uncover<2->{%
+\begin{center}
+\textbf{What is the Type I Error?}
+\end{center}
+}
+\uncover<3->{%
+\begin{center}
+Classical toolkit breaks even with Gaussian data.
+\end{center}
+}
+\end{frame}
+
+\begin{frame}{Adaptive T-Test Non-Trivial Null Distribution}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/introduction_att_hist.pdf}
+    \caption{Adaptive T-Test test statistic distribution for $\sigma \equiv 1$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Intermediate Techniques Fail}
+\begin{itemize}
+    \item Composite null with nuisance parameters (noise levels).
+    \begin{center}
+        \textbf{Simulating on single null point $\centernot\implies$ Type I Error control.}
+    \end{center}
+    \item Sharp null hypothesis (exact zero causal effect) is usually false (“null” treatments often increase the variability of outcomes).
+    \begin{center}
+        \textbf{Breaks permutation methods.}
+    \end{center}
+    \item Adaptive sampling renders the test statistic to be non-pivotal.
+    \begin{center}
+        \textbf{Breaks the bootstrap.}
+    \end{center}
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Simulation to the Rescue?}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/introduction_rescue_0.pdf}
+\end{figure}
+\begin{center}
+    \textbf{To accept or not to accept?}
+\end{center}
+\end{frame}
+
+\begin{frame}{Simulation to the Rescue?}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/introduction_rescue_1.pdf}
+\end{figure}
+\begin{center}
+    \textbf{To accept or not to accept?}
+\end{center}
+\end{frame}
+
+\begin{frame}{Simulation to the Rescue?}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/introduction_rescue_2.pdf}
+\end{figure}
+\begin{center}
+    \textbf{To accept or not to accept?}
+\end{center}
+\end{frame}
+
+\begin{frame}{Simulation to the Rescue?}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/introduction_rescue_3.pdf}
+\end{figure}
+\begin{center}
+    \textbf{To accept or not to accept?}
+\end{center}
+\end{frame}
+
+\begin{frame}{Simulation to the Rescue?}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/introduction_rescue_4.pdf}
+\end{figure}
+\begin{center}
+    \textbf{To accept or not to accept?}
+\end{center}
+\end{frame}
+
+\begin{frame}{Simulation Raises New Challenges}
+\begin{itemize}
+    \item Simulation constrained to \textbf{finite} number of null points.
+    \begin{center}
+        \textbf{How do we deal with composite nulls?}
+    \end{center}
+    \item Simulation has Monte Carlo error. 
+    \begin{center}
+        \textbf{How do we deal with Monte Carlo error?}
+    \end{center}
+    \item Bounded computing power.
+    \begin{center}
+        \textbf{How many points in the null space to simulate?}
+    \end{center}
+    \begin{center}
+        \textbf{Are the simulations even tractable?}
+    \end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Intuition of Our Approach}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/approach_1.pdf}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Partition $\Theta$ into Tiles with Representatives}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/approach_2.pdf}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Simulate on each Representative}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/approach_3.pdf}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Extend Simulation Information to Tile}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/approach_4.pdf}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Divide-and-Conquer for Guarantees on All of $\Theta$}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/approach_5.pdf}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Our Approach: Proof-by-Simulation}
+\textbf{General Workflow:}
+\begin{itemize}
+    \item Let $\Theta$ be a (bounded) null hypothesis space.
+    \item Partition $\Theta$ into tiles $\set{\Theta_i}_{i=1}^I$ 
+        with representatives $\set{\theta_i}_{i=1}^I$.
+    \item Simulate the design on each $\theta_i$ and output test statistics.
+    \item Use our method \textbf{Continuous Simulation Extension} (CSE) to 
+        \emph{extend} information at each $\theta_i$ to any other point in $\Theta_i$.
+    \item Divide-and-conquer to get guarantees on \emph{all of $\Theta$}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Method 1: Validation for Point-wise Confidence}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/validation_scheme.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Method 1: Validation for Point-wise Confidence}
+\begin{itemize}
+    \item \textbf{Validation}: 
+        Construct bounds $(\hat{l}(\cdot), \hat{u}(\cdot))$
+        for the true Type I Error, $f(\cdot)$, with confidence $1-\delta$:
+        \begin{align*}
+            \forall \theta \in \Theta ,\, 
+            &\prob\pr{\hat{l}(\theta) \leq f(\theta)} \geq 1-\delta \text{ and } \\
+            &\prob\pr{\hat{u}(\theta) \geq f(\theta)} \geq 1-\delta
+        \end{align*}
+    \item Point-wise guarantee is appropriate since 
+        there is only one \emph{true} value of $\theta$.
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Method 2: Calibration for Type I Error Proof}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/calibration_scheme.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Method 2: Calibration for Type I Error Proof}
+\begin{itemize}
+    \item \textbf{Calibration}: 
+        Select a (random) critical threshold, $\hat{\lambda}^*$, such that 
+        \begin{align*}
+        \forall \theta \in \Theta,\, 
+        \EEE\br{f_{\hat{\lambda}^*}(\theta)} 
+        \leq 
+        \alpha
+        \end{align*}
+        where $f_{\lambda}(\theta)$ is the Type I Error at $\theta$
+        using threshold $\lambda$.
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Random $\hat{\lambda}^*$ is acceptable}
+\begin{itemize}
+    \item Guarantee is \textbf{overall} valid (regulators want this!).
+    \item Practitioners \textbf{already use} simulations to evaluate designs.
+    \item Our approach is \textbf{strictly stronger} because we can give guarantees.
+\end{itemize}
+\end{frame}
