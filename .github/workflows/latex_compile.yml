@@ -33,8 +33,9 @@ jobs:
 
       # Upload PDF
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
-        with:
-          name: PDF
-          path: main.pdf
+        run: |
+          git checkout gh-pages
+          git merge main
+          git add main.pdf && git commit -m "Add new pdf"
+          git push origin gh-pages
 
