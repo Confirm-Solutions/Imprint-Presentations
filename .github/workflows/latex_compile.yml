@@ -30,13 +30,14 @@ jobs:
         with:
           root_file: main.tex
           
-
       # Upload PDF
       - name: Upload PDF file
         run: |
           git fetch origin gh-pages
+          git stash
           git checkout gh-pages
           git merge main
+          git stash pop
           git add main.pdf
           git commit -m "Add new pdf"
           git push origin gh-pages
