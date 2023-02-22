@@ -23,15 +23,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
         uses: actions/checkout@v3
-        
-      # Update gh-pages branch
-      - name: Update gh-pages
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email ""
-          git fetch origin gh-pages
-          git checkout gh-pages
-          git rebase main -Xtheirs
       
       # Use latex-action to perform the action
       - name: Compile LaTeX document
@@ -39,10 +30,11 @@ jobs:
         with:
           root_file: main.tex
           
+
       # Upload PDF
       - name: Upload PDF file
-        run: |
-          git add main.pdf
-          git commit -m "Add new pdf"
-          git push origin -f
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: main.pdf
 
