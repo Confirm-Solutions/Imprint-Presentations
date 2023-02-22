@@ -34,6 +34,7 @@ jobs:
       # Upload PDF
       - name: Upload PDF file
         run: |
+          git pull origin gh-pages
           git checkout gh-pages
           git merge main
           git add main.pdf && git commit -m "Add new pdf"
