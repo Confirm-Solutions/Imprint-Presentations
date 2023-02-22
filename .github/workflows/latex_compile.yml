@@ -31,7 +31,7 @@ jobs:
           git config --global user.email ""
           git fetch origin gh-pages
           git checkout gh-pages
-          git rebase main
+          git rebase main -Xtheirs
       
       # Use latex-action to perform the action
       - name: Compile LaTeX document
