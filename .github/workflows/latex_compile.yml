@@ -23,6 +23,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
         uses: actions/checkout@v3
+        
+      # Update gh-pages branch
+      - name: Update gh-pages
+        run: |
+          git checkout gh-pages
+          git merge main
       
       # Use latex-action to perform the action
       - name: Compile LaTeX document
@@ -33,12 +39,7 @@ jobs:
       # Upload PDF
       - name: Upload PDF file
         run: |
-          git fetch origin gh-pages
-          git stash
-          git checkout gh-pages
-          git merge main
-          git stash pop
           git add main.pdf
           git commit -m "Add new pdf"
-          git push origin gh-pages
+          git push
 
