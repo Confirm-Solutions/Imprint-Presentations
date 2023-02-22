@@ -29,7 +29,7 @@ jobs:
         run: |
           git fetch origin gh-pages
           git checkout gh-pages
-          git merge main
+          git rebase main
       
       # Use latex-action to perform the action
       - name: Compile LaTeX document
@@ -42,5 +42,5 @@ jobs:
         run: |
           git add main.pdf
           git commit -m "Add new pdf"
-          git push
+          git push origin -f
 
