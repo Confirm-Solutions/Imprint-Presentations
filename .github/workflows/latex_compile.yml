@@ -27,6 +27,7 @@ jobs:
       # Update gh-pages branch
       - name: Update gh-pages
         run: |
+          git fetch origin gh-pages
           git checkout gh-pages
           git merge main
       
